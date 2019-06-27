@@ -19,6 +19,11 @@ namespace Eventures
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureLogging((hostingContext, log) =>
+                {
+                    log.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                    log.AddConsole();
+                })
                 .UseStartup<Startup>();
     }
 }
